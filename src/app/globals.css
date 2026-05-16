@@ -45,71 +45,102 @@
 
 :root {
   --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+
+  /* ─── Sci-Fi Rocket Palette v3 ─── */
+  --bg-main: #050B18;
+  --bg-secondary: #0D1B2A;
+  --bg-card: #132238;
+  --bg-panel: #1B2F4A;
+
+  --accent-primary: #00CEC9;
+  --accent-hover: #00F5FF;
+  --reactor-green: #7DF9C0;
+  --nebula-purple: #7B6FFF;
+  --ion-blue: #4DA8FF;
+
+  --status-success: #7DF9C0;
+  --status-warning: #FFC857;
+  --status-danger: #FF4D00;
+  --status-error: #FF3B30;
+  --status-info: #4DA8FF;
+
+  --text-primary: #F8FAFC;
+  --text-secondary: #B8C4D6;
+  --text-muted: #7A8CA5;
+
+  --mission-collatz: #00D2FF;
+  --mission-division: #B44DFF;
+  --mission-fibonacci: #00FF9F;
+  --mission-lucas: #FF8C00;
+  --mission-tribonacci: #FF50B4;
+  --mission-euclidean: #FF5C2E;
+
+  /* ─── shadcn/ui theme tokens ─── */
+  --background: #050B18;
+  --foreground: #F8FAFC;
+  --card: #132238;
+  --card-foreground: #F8FAFC;
+  --popover: #132238;
+  --popover-foreground: #F8FAFC;
+  --primary: #00CEC9;
+  --primary-foreground: #050B18;
+  --secondary: #1B2F4A;
+  --secondary-foreground: #B8C4D6;
+  --muted: #1B2F4A;
+  --muted-foreground: #7A8CA5;
+  --accent: #1B2F4A;
+  --accent-foreground: #F8FAFC;
+  --destructive: #FF3B30;
+  --border: rgba(0,206,201,0.2);
+  --input: #0D1B2A;
+  --ring: #00CEC9;
+  --chart-1: #00D2FF;
+  --chart-2: #00FF9F;
+  --chart-3: #B44DFF;
+  --chart-4: #FF8C00;
+  --chart-5: #FF5C2E;
+  --sidebar: #0D1B2A;
+  --sidebar-foreground: #F8FAFC;
+  --sidebar-primary: #00CEC9;
+  --sidebar-primary-foreground: #050B18;
+  --sidebar-accent: #1B2F4A;
+  --sidebar-accent-foreground: #F8FAFC;
+  --sidebar-border: rgba(0,206,201,0.15);
+  --sidebar-ring: #00CEC9;
 }
 
 .dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
+  --background: #050B18;
+  --foreground: #F8FAFC;
+  --card: #132238;
+  --card-foreground: #F8FAFC;
+  --popover: #132238;
+  --popover-foreground: #F8FAFC;
+  --primary: #00CEC9;
+  --primary-foreground: #050B18;
+  --secondary: #1B2F4A;
+  --secondary-foreground: #B8C4D6;
+  --muted: #1B2F4A;
+  --muted-foreground: #7A8CA5;
+  --accent: #1B2F4A;
+  --accent-foreground: #F8FAFC;
+  --destructive: #FF3B30;
+  --border: rgba(0,206,201,0.2);
+  --input: #0D1B2A;
+  --ring: #00CEC9;
+  --chart-1: #00D2FF;
+  --chart-2: #00FF9F;
+  --chart-3: #B44DFF;
+  --chart-4: #FF8C00;
+  --chart-5: #FF5C2E;
+  --sidebar: #0D1B2A;
+  --sidebar-foreground: #F8FAFC;
+  --sidebar-primary: #00CEC9;
+  --sidebar-primary-foreground: #050B18;
+  --sidebar-accent: #1B2F4A;
+  --sidebar-accent-foreground: #F8FAFC;
+  --sidebar-border: rgba(0,206,201,0.15);
+  --sidebar-ring: #00CEC9;
 }
 
 @layer base {
@@ -119,4 +150,106 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+/* Custom animations for the space theme */
+@keyframes twinkle {
+  0%, 100% { opacity: 0.2; }
+  50% { opacity: 1; }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 5px rgba(0, 206, 201, 0.3), 0 0 10px rgba(0, 206, 201, 0.1);
+  }
+  50% {
+    box-shadow: 0 0 15px rgba(0, 206, 201, 0.5), 0 0 30px rgba(0, 206, 201, 0.2), 0 0 45px rgba(0, 206, 201, 0.1);
+  }
+}
+
+@keyframes scanline {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100vh); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+/* Custom scrollbar for dark theme */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(13, 27, 42, 0.5);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 206, 201, 0.3);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 206, 201, 0.5);
+}
+
+/* KaTeX formula dark theme overrides */
+.katex {
+  color: #F8FAFC !important;
+}
+
+.katex .mord,
+.katex .mbin,
+.katex .mrel,
+.katex .mopen,
+.katex .mclose,
+.katex .mpunct,
+.katex .minner {
+  color: #F8FAFC !important;
+}
+
+.katex .mord.text {
+  color: #B8C4D6 !important;
+}
+
+/* Selection color */
+::selection {
+  background: rgba(0, 206, 201, 0.3);
+  color: #ffffff;
+}
+
+/* ─── Uniform Scanline & Background Utilities ──────────────────────── */
+
+@keyframes scanline-move {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100vh); }
+}
+
+.scanline-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 206, 201, 0.015) 2px,
+    rgba(0, 206, 201, 0.015) 4px
+  );
+  z-index: 40;
+}
+
+.cosmic-bg {
+  background: linear-gradient(180deg, #050B18 0%, #0D1B2A 100%);
+}
+
+.hover-glow {
+  transition: all 250ms ease-out;
+}
+.hover-glow:hover {
+  text-shadow: 0 0 5px rgba(0, 206, 201, 0.5);
 }
