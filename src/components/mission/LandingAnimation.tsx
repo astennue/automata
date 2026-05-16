@@ -474,7 +474,7 @@ function DustCloud({ visible, surfaceColors }: { visible: boolean; surfaceColors
 
   if (!visible) return null;
   return (
-    <div className="absolute left-1/2 -translate-x-1/2 pointer-events-none z-20" style={{ bottom: 'calc(20vw - 40px)' }}>
+    <div className="absolute left-1/2 -translate-x-1/2 pointer-events-none z-20" style={{ bottom: 'calc(6vw - 40px)' }}>
       {puffs.map((p, i) => (
         <div
           key={i}
@@ -512,7 +512,7 @@ function LandingSparks({ visible, surfaceColors }: { visible: boolean; surfaceCo
 
   if (!visible) return null;
   return (
-    <div className="absolute left-1/2 pointer-events-none z-20" style={{ bottom: 'calc(20vw - 20px)' }}>
+    <div className="absolute left-1/2 pointer-events-none z-20" style={{ bottom: 'calc(6vw - 20px)' }}>
       {sparks.map((sp) => (
         <div
           key={sp.id}
@@ -532,7 +532,7 @@ function LandingSparks({ visible, surfaceColors }: { visible: boolean; surfaceCo
 function ShockwaveRing({ visible, surfaceColors }: { visible: boolean; surfaceColors: MissionSurfaceColors }) {
   if (!visible) return null;
   return (
-    <div className="absolute left-1/2 -translate-x-1/2 pointer-events-none z-20" style={{ bottom: 'calc(20vw - 30px)' }}>
+    <div className="absolute left-1/2 -translate-x-1/2 pointer-events-none z-20" style={{ bottom: 'calc(6vw - 30px)' }}>
       <div
         className="w-[70px] h-[22px] rounded-[50%]"
         style={{
@@ -548,7 +548,7 @@ function ShockwaveRing({ visible, surfaceColors }: { visible: boolean; surfaceCo
 function ExpandingRings({ visible, surfaceColors }: { visible: boolean; surfaceColors: MissionSurfaceColors }) {
   if (!visible) return null;
   return (
-    <div className="absolute left-1/2 -translate-x-1/2 pointer-events-none z-20" style={{ bottom: 'calc(20vw - 38px)' }}>
+    <div className="absolute left-1/2 -translate-x-1/2 pointer-events-none z-20" style={{ bottom: 'calc(6vw - 38px)' }}>
       {[0, 1, 2].map((i) => (
         <div
           key={i}
@@ -572,7 +572,7 @@ function ApproachPing({ active, surfaceColors }: { active: boolean; surfaceColor
     <div
       className="absolute left-1/2 w-[160px] h-[40px] rounded-[50%] pointer-events-none z-10"
       style={{
-        bottom: 'calc(20vw - 35px)', border: `1px solid ${surfaceColors.accent}66`,
+        bottom: 'calc(6vw - 35px)', border: `1px solid ${surfaceColors.accent}66`,
         animation: 'la-approach-ping 1.2s ease-out infinite',
       }}
     />
@@ -1052,7 +1052,7 @@ export default function LandingAnimation() {
           60%  { transform: translateX(-50%) translateY(-200px) rotate(0deg); }
           85%  { transform: translateX(-50%) translateY(-20px)  rotate(0deg); }
           93%  { transform: translateX(-50%) translateY(50px)   rotate(0deg); }
-          100% { transform: translateX(-50%) translateY(80px)   rotate(0deg); }
+          100% { transform: translateX(-50%) translateY(95px)  rotate(0deg); }
         }
         @keyframes la-flame-flicker {
           0%,100% { transform: scaleX(1) scaleY(1); opacity: 1; }
@@ -1121,7 +1121,7 @@ export default function LandingAnimation() {
         className="absolute z-[2]"
         style={{
           width: '160vw', height: '160vw', borderRadius: '50%', overflow: 'hidden',
-          bottom: '-140vw', left: '50%', transform: 'translateX(-50%)',
+          bottom: '-154vw', left: '50%', transform: 'translateX(-50%)',
           ...(surfaceShake ? { animation: 'la-surface-shake 0.4s ease-out' } : {}),
         }}
       >
@@ -1143,7 +1143,7 @@ export default function LandingAnimation() {
       </div>
 
       {/* ── Landing pod sitting on planet surface (after touchdown) ── */}
-      <div className="absolute z-[8]" style={{ bottom: 'calc(20vw - 8px)', left: '50%', transform: 'translateX(-50%)' }}>
+      <div className="absolute z-[8]" style={{ bottom: 'calc(6vw - 8px)', left: '50%', transform: 'translateX(-50%)' }}>
         <LandingPod surfaceColors={surfaceColors} />
       </div>
 
@@ -1154,7 +1154,7 @@ export default function LandingAnimation() {
       <div
         className="absolute z-[10] flex flex-col items-center"
         style={{
-          bottom: 'calc(20vw - 50px)', left: '50%',
+          bottom: 'calc(6vw - 50px)', left: '50%',
           transform: 'translateX(-50%) translateY(-820px) rotate(-5deg)',
           animation: landing ? 'la-descent 5s cubic-bezier(0.4,0,0.2,1) forwards' : 'none',
         }}
@@ -1175,7 +1175,7 @@ export default function LandingAnimation() {
 
       {/* ── Planet label ── */}
       <div className="absolute z-30" style={{
-        bottom: 'calc(20vw - 140px)', left: '50%', transform: 'translateX(-50)',
+        bottom: 'calc(6vw - 140px)', left: '50%', transform: 'translateX(-50%)',
         fontSize: '8px', letterSpacing: '3px', color: surfaceColors.planetLabel, whiteSpace: 'nowrap',
         fontFamily: "var(--font-share-tech-mono), monospace",
       }}>
