@@ -16,6 +16,8 @@ import {
   lucasNth,
   euclideanAlgorithm,
   divisionAlgorithm,
+  palindromeCheck,
+  validatePalindromeInput,
 } from '@/lib/mathAlgorithms';
 import KaTeXFormula from './KaTeXFormula';
 import QuizComponent from './QuizComponent';
@@ -64,6 +66,7 @@ const missionColors: Record<string, { primary: string; glow: string; bg: string;
   pulsar: { primary: '#FF8C00', glow: 'rgba(255,140,0,0.15)', bg: 'rgba(255,140,0,0.08)', border: 'rgba(255,140,0,0.3)' },
   crimson: { primary: '#FF5C2E', glow: 'rgba(255,92,46,0.15)', bg: 'rgba(255,92,46,0.08)', border: 'rgba(255,92,46,0.3)' },
   warp: { primary: '#B44DFF', glow: 'rgba(180,77,255,0.15)', bg: 'rgba(180,77,255,0.08)', border: 'rgba(180,77,255,0.3)' },
+  amber: { primary: '#FFD700', glow: 'rgba(255,215,0,0.15)', bg: 'rgba(255,215,0,0.08)', border: 'rgba(255,215,0,0.3)' },
 };
 
 // ---- Tab definitions ----
@@ -346,6 +349,45 @@ export default function MissionPage() {
             </div>
           </div>
         );
+      } else if (id === 'palindrome') {
+        // Validate input
+        const validation = validatePalindromeInput(simInput1);
+        if (!validation.valid) {
+          setSimResult(<span className="text-red-400">{validation.error}</span>);
+          return;
+        }
+        const result = palindromeCheck(simInput1);
+        setSimResult(
+          <div className="space-y-4">
+            <div className="text-lg font-semibold" style={{ color: colors.primary }}>
+              Palindrome Check: "{simInput1}"
+            </div>
+            <div className="text-slate-300 text-lg font-bold">
+              {result.isPalindrome ? '✅ IS a palindrome!' : '❌ NOT a palindrome'}
+            </div>
+            <div className="text-sm text-slate-400">
+              Normalized: <span className="text-white font-mono">"{result.normalized}"</span>
+            </div>
+            <div className="overflow-x-auto max-h-64 overflow-y-auto">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="border-b border-slate-700">
+                    <th className="text-left py-2 px-3 text-slate-400">Step</th>
+                    <th className="text-left py-2 px-3 text-slate-400">Comparison</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {result.steps.map((s, i) => (
+                    <tr key={i} className="border-b border-slate-800/50">
+                      <td className="py-2 px-3 font-mono" style={{ color: colors.primary }}>{i + 1}</td>
+                      <td className="py-2 px-3 text-slate-300 text-xs">{s}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        );
       }
     } catch {
       setSimResult(<span className="text-red-400">Computation error. Please check your inputs.</span>);
@@ -382,6 +424,14 @@ export default function MissionPage() {
         const q = Math.floor(a / b);
         const r = a % b;
         return { number: a, quotient: q, remainder: r };
+      });
+    } else if (id === 'palindrome') {
+      // Visualize palindrome check for sample words
+      const samples = ['racecar', 'level', 'hello', 'madam', 'world', 'kayak', 'robot', 'civic', 'noon', 'python'];
+      return samples.map(word => {
+        const normalized = word.toLowerCase().replace(/\s/g, '');
+        const isPal = normalized === normalized.split('').reverse().join('');
+        return { word, isPalindrome: isPal ? 1 : 0 };
       });
     }
     return [];
@@ -604,6 +654,7 @@ export default function MissionPage() {
                           {mission.id === 'lucas' && 'L(n) = F(n-1) + F(n+1)'}
                           {mission.id === 'euclidean' && 'GCD(a,0) = a terminates algorithm'}
                           {mission.id === 'division' && 'Remainder is unique: 0 ≤ r < |b|'}
+                          {mission.id === 'palindrome' && 'Requires PDA — cannot be recognized by FA'}
                         </div>
                       </div>
                       <div
@@ -620,6 +671,7 @@ export default function MissionPage() {
                           {mission.id === 'lucas' && 'O(n) for sequence generation'}
                           {mission.id === 'euclidean' && 'O(log(min(a,b))) — very efficient'}
                           {mission.id === 'division' && 'O(1) — constant time operation'}
+                          {mission.id === 'palindrome' && 'O(n) — linear comparison'}
                         </div>
                       </div>
                     </div>
@@ -686,7 +738,7 @@ export default function MissionPage() {
 
                   {/* Input area */}
                   <div className="flex flex-col sm:flex-row items-start sm:items-end gap-4">
-                    {(mission.id === 'collatz' || mission.id === 'fibonacci' || mission.id === 'tribonacci' || mission.id === 'lucas') && (
+                    {(mission.id === 'collatz' || mission.id === 'fibonacci' || mission.id === 'tribonacci' || mission.id === 'lucas' || mission.id === 'palindrome') && (
                       <div className="flex-1 w-full space-y-2">
                         <Label className="text-slate-400 text-xs">{mission.simulatorLabel}</Label>
                         <Input
@@ -870,6 +922,38 @@ export default function MissionPage() {
                           />
                           <Bar dataKey="quotient" fill={colors.primary} radius={[4, 4, 0, 0]} name="Quotient" opacity={0.8} />
                           <Bar dataKey="remainder" fill="#FF8C00" radius={[4, 4, 0, 0]} name="Remainder" opacity={0.8} />
+                        </BarChart>
+                      </ResponsiveContainer>
+                    )}
+
+                    {/* Palindrome chart */}
+                    {mission.id === 'palindrome' && (
+                      <ResponsiveContainer width="100%" height={400}>
+                        <BarChart data={vizData} margin={{ top: 20, right: 30, left: 20, bottom: 20 }}>
+                          <CartesianGrid strokeDasharray="3 3" stroke="rgba(148,163,184,0.1)" />
+                          <XAxis
+                            dataKey="word"
+                            stroke="#64748b"
+                            tick={{ fill: '#94a3b8', fontSize: 12 }}
+                          />
+                          <YAxis
+                            stroke="#64748b"
+                            tick={{ fill: '#94a3b8', fontSize: 12 }}
+                            tickFormatter={(v) => v === 1 ? 'Palindrome' : 'Not'}
+                            domain={[0, 1]}
+                            ticks={[0, 1]}
+                          />
+                          <Tooltip
+                            contentStyle={{
+                              backgroundColor: 'rgba(15,23,42,0.95)',
+                              border: `1px solid ${colors.border}`,
+                              borderRadius: '8px',
+                              color: '#e2e8f0',
+                              fontSize: 12,
+                            }}
+                            formatter={(value: number) => [value === 1 ? 'Palindrome' : 'Not a palindrome', 'Result']}
+                          />
+                          <Bar dataKey="isPalindrome" fill={colors.primary} radius={[4, 4, 0, 0]} name="Result" opacity={0.8} />
                         </BarChart>
                       </ResponsiveContainer>
                     )}

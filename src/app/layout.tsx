@@ -37,7 +37,7 @@ export const metadata: Metadata = {
   keywords: ["mathematics", "education", "sequences", "algorithms", "Fibonacci", "Collatz", "Euclidean", "interactive"],
   authors: [{ name: "Mathematical Mission Control" }],
   icons: {
-    icon: "https://z-cdn.chatglm.cn/z-ai/static/logo.svg",
+    icon: "/favicon.png",
   },
 };
 

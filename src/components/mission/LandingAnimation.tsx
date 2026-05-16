@@ -189,6 +189,28 @@ const MISSION_COLORS: Record<string, MissionColorInfo> = {
       planetLabel: 'rgba(160,80,255,0.55)', phaseLabelColor: 'rgba(200,150,255,0.8)',
     },
   },
+  palindrome: {
+    glow: 'rgba(255,215,0,0.6)',
+    hex: '#FFD700',
+    surface: {
+      dark: '#1a1500', mid: '#2a2000', light: '#352b00',
+      border: 'rgba(220,180,0,0.35)',
+      glowPulseA: '0 0 60px rgba(220,180,0,0.35), 0 0 120px rgba(240,200,0,0.18)',
+      glowPulseB: '0 0 100px rgba(240,200,0,0.5), 0 0 180px rgba(255,215,0,0.28)',
+      padBorder: 'rgba(240,200,0,0.7)', padLight: '#FFD700',
+      padLightGlow: '0 0 10px rgba(255,215,0,0.9)', dust: 'rgba(220,180,0,0.13)',
+      flash: '#FFD700', textShadow: '0 0 30px rgba(255,215,0,1), 0 0 60px rgba(240,200,0,0.8)',
+      textColor: '#FFD700', ringBorder: 'rgba(255,215,0,0.8)',
+      horizonGradient: 'linear-gradient(to top, rgba(80,60,0,0.15), transparent)',
+      surfaceLine: 'rgba(240,200,0,0.5)', craterBorder: 'rgba(180,150,0,0.2)', craterBg: 'rgba(25,20,0,0.4)',
+      accent: '#FFD700', flameAccent: '#FFD700',
+      atmosphereBorder: 'rgba(220,180,0,0.3)', gridTint: 'rgba(255,215,0,0.06)',
+      podDomeA: 'rgba(200,160,0,0.8)', podDomeB: 'rgba(40,30,0,0.9)',
+      beaconColor: '#FFD700', antennaTip: 'rgba(0,255,200,0.8)',
+      solarFill: 'rgba(200,160,0,0.25)', solarBorder: 'rgba(200,160,0,0.4)',
+      planetLabel: 'rgba(220,180,0,0.55)', phaseLabelColor: 'rgba(255,230,100,0.8)',
+    },
+  },
 };
 
 // Planet image mapping for each mission
@@ -199,6 +221,7 @@ const PLANET_IMAGES: Record<string, string> = {
   lucas: '/planets/planet-lucas.png',
   euclidean: '/planets/planet-euclidean.png',
   division: '/planets/planet-division.png',
+  palindrome: '/planets/planet-palindrome.png',
 };
 
 // Planet names for the HUD
@@ -209,6 +232,7 @@ const PLANET_NAMES: Record<string, string> = {
   lucas: 'PULSARA · SECTOR L-9',
   euclidean: 'EMBER-X · SECTOR E-2',
   division: 'WARP-IX · SECTOR D-6',
+  palindrome: 'AURELIA-VII · SECTOR P-3',
 };
 
 const DEFAULT_COLOR: MissionColorInfo = MISSION_COLORS.division;
@@ -1026,9 +1050,9 @@ export default function LandingAnimation() {
           0%   { transform: translateX(-50%) translateY(-820px) rotate(-5deg); }
           30%  { transform: translateX(-50%) translateY(-500px) rotate(-2deg); }
           60%  { transform: translateX(-50%) translateY(-200px) rotate(0deg); }
-          85%  { transform: translateX(-50%) translateY(-40px)  rotate(0deg); }
-          93%  { transform: translateX(-50%) translateY(-8px)   rotate(0deg); }
-          100% { transform: translateX(-50%) translateY(0px)    rotate(0deg); }
+          85%  { transform: translateX(-50%) translateY(-20px)  rotate(0deg); }
+          93%  { transform: translateX(-50%) translateY(50px)   rotate(0deg); }
+          100% { transform: translateX(-50%) translateY(80px)   rotate(0deg); }
         }
         @keyframes la-flame-flicker {
           0%,100% { transform: scaleX(1) scaleY(1); opacity: 1; }
