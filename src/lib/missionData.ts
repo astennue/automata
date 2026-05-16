@@ -280,5 +280,49 @@ export const missions: MissionData[] = [
       { question: 'When the remainder r = 0, what does it mean?', options: ['a is prime', 'b divides a evenly', 'a equals b', 'q equals 0'], correct: 1 },
       { question: 'What is the remainder when 256 is divided by 17?', options: ['1', '15', '16', '0'], correct: 0 },
     ]
+  },
+  {
+    id: 'palindrome',
+    title: 'Mission Palindrome',
+    subtitle: 'The Symmetry Directive',
+    description: 'Explore palindromes — words and phrases that read the same forwards and backwards, and their deep connection to Pushdown Automata.',
+    icon: '[P]',
+    color: 'amber',
+    overview: `A palindrome is a string that reads the same forwards and backwards — a perfect mirror of characters. From "racecar" to "A man a plan a canal Panama," palindromes have fascinated linguists, mathematicians, and computer scientists for centuries.\n\nIn formal language theory, palindromes hold a special place. The language of palindromes over an alphabet is a classic example of a language that can be recognized by a Pushdown Automaton (PDA) but NOT by any Finite Automaton (FA). This is because checking whether a string is a palindrome requires comparing the first half of the string with the reverse of the second half — a task that demands unbounded memory to store the first half for later comparison.\n\nA Pushdown Automaton solves this by using a stack: it pushes symbols from the first half of the input onto the stack, then non-deterministically guesses the midpoint and pops symbols to compare with the second half. If every popped symbol matches the corresponding input symbol, the string is accepted. This demonstrates the greater expressive power of PDAs over FAs — they can handle context-free languages that are beyond the reach of regular languages.\n\nThe palindrome language is context-free but not regular, making it a fundamental example in the Chomsky hierarchy of formal languages.`,
+    formula: 'w = w^R',
+    formulaDescription: 'A string w is a palindrome if and only if it equals its reverse w^R. This seemingly simple condition defines a language that is context-free but not regular — it requires a Pushdown Automaton (PDA) for recognition, as the stack provides the unbounded memory needed to compare the first and second halves of the string.',
+    workedExample: {
+      title: 'Checking if "racecar" is a palindrome',
+      steps: [
+        'Input: "racecar" (7 characters)',
+        'Normalize: "racecar" (already lowercase, no spaces)',
+        'Compare positions from outside in:',
+        'Position 1 vs 7: r vs r ✓',
+        'Position 2 vs 6: a vs a ✓',
+        'Position 3 vs 5: c vs c ✓',
+        'Position 4 (middle): e — single center character, no pair needed ✓',
+        'All character pairs match → "racecar" IS a palindrome!',
+        'PDA perspective: Push r,a,c,e onto stack; guess midpoint; pop e (skip center), pop c vs c ✓, pop a vs a ✓, pop r vs r ✓ → Accept'
+      ]
+    },
+    simulatorLabel: 'Word or Phrase',
+    simulatorPlaceholder: 'Enter a word or phrase (e.g., racecar, A man a plan a canal Panama)',
+    applications: [
+      'DNA sequence analysis — palindromic sequences play a crucial role in gene regulation and restriction enzyme recognition sites',
+      'Error detection in data transmission — palindromic parity checks and cyclic redundancy codes',
+      'Cryptography — palindromic structures appear in certain encryption algorithms and hash functions',
+      'Natural language processing — identifying symmetric linguistic patterns and stylistic analysis',
+      'Compiler design — context-free grammar parsing uses stack-based mechanisms similar to PDA palindrome recognition'
+    ],
+    history: 'Palindromes have a rich history spanning millennia. The earliest known palindrome is the Sator Square, a Latin word square found in Pompeii (before 79 AD), which reads the same forwards, backwards, top-to-bottom, and bottom-to-top: SATOR AREPO TENET OPERA ROTAS. In English, palindromes appeared as early as the 17th century. The formal study of palindrome languages in computer science began with the development of automata theory in the 1950s and 1960s. Noam Chomsky\'s hierarchy of formal languages classified palindrome languages as context-free, and the proof that palindromes cannot be recognized by finite automata (using the pumping lemma for regular languages) became a standard result in theoretical computer science. The connection to Pushdown Automata was established as part of the foundational work on context-free languages by Chomsky and Schützenberger.',
+    quiz: [
+      { question: 'What is a palindrome?', options: ['A string that reads the same forwards and backwards', 'A string with all identical characters', 'A string sorted in alphabetical order', 'A string with an even number of characters'], correct: 0 },
+      { question: 'Which of the following is a palindrome?', options: ['"hello"', '"racecar"', '"python"', '"algorithm"'], correct: 1 },
+      { question: 'What type of automaton can recognize the language of palindromes?', options: ['Finite Automaton (FA)', 'Pushdown Automaton (PDA)', 'Turing Machine only', 'Linear Bounded Automaton'], correct: 1 },
+      { question: 'Why can\'t a Finite Automaton recognize all palindromes?', options: ['It runs too slowly', 'It cannot store unbounded memory to compare the first and second halves', 'It can only process even-length strings', 'It requires a special alphabet'], correct: 1 },
+      { question: 'In a PDA that recognizes palindromes, what is the purpose of the stack?', options: ['To count the total number of characters', 'To store the first half of the input for comparison with the second half', 'To reverse the entire input string', 'To track the current state of the automaton'], correct: 1 },
+      { question: 'Is "A man a plan a canal Panama" a palindrome when spaces are removed?', options: ['Yes', 'No', 'Only with capitalization preserved', 'It depends on the alphabet'], correct: 0 },
+      { question: 'What is the palindrome language over {a, b} formally?', options: ['{w | w = w^R, w ∈ {a,b}*}', '{w | w has equal a\'s and b\'s}', '{w | w = ww}', '{a^n b^n | n ≥ 0}'], correct: 0 },
+    ]
   }
 ];

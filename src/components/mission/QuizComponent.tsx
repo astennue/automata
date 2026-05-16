@@ -23,6 +23,7 @@ const badgeMap: Record<string, { name: string; icon: string; color: string }> = 
   lucas: { name: 'Lucas Commander', icon: '[L]', color: '#34d399' },
   euclidean: { name: 'Euclid Explorer', icon: '[E]', color: '#fb7185' },
   division: { name: 'Division Commander', icon: '[D]', color: '#38bdf8' },
+  palindrome: { name: 'Symmetry Specialist', icon: '[P]', color: '#FFD700' },
 };
 
 // Celebration particles for mission complete

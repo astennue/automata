@@ -74,6 +74,7 @@
   --mission-lucas: #FF8C00;
   --mission-tribonacci: #FF50B4;
   --mission-euclidean: #FF5C2E;
+  --mission-palindrome: #FFD700;
 
   /* ─── shadcn/ui theme tokens ─── */
   --background: #050B18;
@@ -141,6 +142,7 @@
   --sidebar-accent-foreground: #F8FAFC;
   --sidebar-border: rgba(0,206,201,0.15);
   --sidebar-ring: #00CEC9;
+  --mission-palindrome: #FFD700;
 }
 
 @layer base {

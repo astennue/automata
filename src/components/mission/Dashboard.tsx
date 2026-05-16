@@ -464,6 +464,7 @@ const PLANET_IMAGES: Record<string, string> = {
   lucas: '/planets/planet-lucas.png',
   euclidean: '/planets/planet-euclidean.png',
   division: '/planets/planet-division.png',
+  palindrome: '/planets/planet-palindrome.png',
 };
 
 // Color mapping for neon glow effects
@@ -509,6 +510,13 @@ const COLOR_MAP: Record<string, { hex: string; tailwind: string; bg: string; bor
     bg: 'rgba(180, 77, 255, 0.08)',
     border: 'rgba(180, 77, 255, 0.25)',
     shadow: '0 0 15px rgba(180,77,255,0.3), 0 0 30px rgba(180,77,255,0.1)',
+  },
+  amber: {
+    hex: '#FFD700',
+    tailwind: 'text-yellow-400',
+    bg: 'rgba(255, 215, 0, 0.08)',
+    border: 'rgba(255, 215, 0, 0.25)',
+    shadow: '0 0 15px rgba(255,215,0,0.3), 0 0 30px rgba(255,215,0,0.1)',
   },
 };
 
