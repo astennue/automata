@@ -1124,23 +1124,27 @@ export default function LandingAnimation() {
         style={{
           width: '200vh', height: '200vh', borderRadius: '50%', overflow: 'hidden',
           bottom: '-182vh', left: '50%', transform: 'translateX(-50%)',
+          background: planetFallback,
           ...(surfaceShake ? { animation: 'la-surface-shake 0.4s ease-out' } : {}),
         }}
       >
-        {loadingMissionId && PLANET_IMAGES[loadingMissionId] ? (
+        {loadingMissionId && PLANET_IMAGES[loadingMissionId] && (
           <img
             src={PLANET_IMAGES[loadingMissionId]}
             alt={`${loadingMissionId} planet surface`}
-            style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.9 }}
+            style={{
+              position: 'absolute',
+              top: '-45%',
+              left: 0,
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+              opacity: 0.9,
+            }}
             onError={(e) => {
-              const target = e.currentTarget.parentElement;
-              if (target) {
-                target.style.background = planetFallback;
-              }
+              e.currentTarget.style.display = 'none';
             }}
           />
-        ) : (
-          <div className="w-full h-full" style={{ background: planetFallback }} />
         )}
       </div>
 
