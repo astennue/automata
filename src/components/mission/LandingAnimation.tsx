@@ -1052,8 +1052,8 @@ export default function LandingAnimation() {
           50%  { transform: translateX(-50%) translateY(-280px) rotate(-1deg); }
           70%  { transform: translateX(-50%) translateY(-100px) rotate(0deg); }
           85%  { transform: translateX(-50%) translateY(-15px)  rotate(0deg); }
-          93%  { transform: translateX(-50%) translateY(8px)    rotate(0deg); }
-          97%  { transform: translateX(-50%) translateY(-3px)   rotate(0deg); }
+          95%  { transform: translateX(-50%) translateY(5px)    rotate(0deg); }
+          97%  { transform: translateX(-50%) translateY(-2px)   rotate(0deg); }
           100% { transform: translateX(-50%) translateY(0px)    rotate(0deg); }
         }
         @keyframes la-flame-flicker {
@@ -1175,7 +1175,7 @@ export default function LandingAnimation() {
       <div
         className="absolute z-[10] flex flex-col items-center"
         style={{
-          bottom: 'calc(18vh - 47px)', left: '50%',
+          bottom: 'calc(18vh - 55px)', left: '50%',
           transform: 'translateX(-50%) translateY(-800px) rotate(-5deg)',
           animation: landing ? 'la-descent 5s cubic-bezier(0.4,0,0.2,1) forwards' : 'none',
         }}
