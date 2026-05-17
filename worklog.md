@@ -149,3 +149,34 @@ Stage Summary:
 - All effect components (dust, sparks, shockwave, rings, approach ping) repositioned to the new 18vh surface line
 - Atmosphere ring and horizon line provide clear visual indication of the planet surface
 
+---
+Task ID: 1
+Agent: landing-animation-fix-v2
+Task: Fix Landing Animation — planet visibility and rocket touchdown positioning
+
+Work Log:
+- Read worklog.md and LandingAnimation.tsx (1220 lines)
+- Identified two critical bugs:
+  1. **Planet disappearing on image error**: The `<img>` tag's `onError` set background on the parent, but the broken `<img>` still overlaid the fallback, making the planet invisible if the image failed to load.
+  2. **Rocket not touching planet surface**: Rocket wrapper at `bottom: calc(18vh - 55px)` placed landing legs ~8px above the surface because the SVG legs are ~47px from the bottom of the rendered image, not 55px.
+
+- Applied three fixes to `/home/z/my-project/src/components/mission/LandingAnimation.tsx`:
+
+1. **Fix 1: Planet visibility** (lines 1120-1141) — Moved `planetFallback` gradient to the container div's `background` style so it's always visible. Changed the conditional from ternary (img vs fallback div) to always-render-fallback + conditionally overlay image. Updated `onError` to set `e.currentTarget.style.display = 'none'` instead of trying to set parent background, so the broken image disappears and the fallback gradient underneath is revealed.
+
+2. **Fix 2: Rocket touchdown position** (line 1177) — Changed `bottom: 'calc(18vh - 55px)'` to `bottom: 'calc(18vh - 47px)'`. This accounts for the SVG landing legs being 47px from the bottom of the rendered image (163 viewBox units × 0.6585 scale ≈ 107.3px from top, total height ≈ 154.7px, legs from bottom ≈ 47.4px).
+
+3. **Fix 2 continued: Descent keyframes bounce** (lines 1049-1058) — Updated `la-descent` keyframes to add a more realistic touchdown bounce:
+   - Removed 95% step (was `translateY(5px)`)
+   - Added 93% step: `translateY(8px)` — slight overshoot past surface
+   - Added 97% step: `translateY(-3px)` — small bounce back up
+   - 100% remains: `translateY(0px)` — settles on surface
+
+4. Lint check passes with no errors
+5. Dev server compiles successfully
+
+Stage Summary:
+- Planet is always visible even if the image fails to load — fallback gradient is the background, image overlays on top
+- Rocket landing legs now reach exactly to the 18vh surface line with the corrected 47px offset
+- Touchdown animation has a natural bounce effect (overshoot → bounce → settle) at 93%/97%/100% keyframes
+
