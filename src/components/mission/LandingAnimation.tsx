@@ -1118,16 +1118,16 @@ export default function LandingAnimation() {
       {/* ── Power bar ── */}
       <PowerBar landing={landing} />
 
-      {/* ── Planet image disc — visible in the background above the surface ── */}
+      {/* ── Planet image disc — the actual planet visible above the surface ── */}
       {loadingMissionId && PLANET_IMAGES[loadingMissionId] && (
         <div
           className="absolute z-[1] pointer-events-none"
           style={{
-            bottom: 'calc(18vh + 2vh)',
+            bottom: 'calc(18vh + 4vh)',
             left: '50%',
             transform: 'translateX(-50%)',
-            width: '45vh',
-            height: '45vh',
+            width: '50vh',
+            height: '50vh',
           }}
         >
           <img
@@ -1137,8 +1137,8 @@ export default function LandingAnimation() {
               width: '100%',
               height: '100%',
               objectFit: 'contain',
-              opacity: 0.6,
-              filter: `drop-shadow(0 0 30px ${surfaceColors.atmosphereBorder}) drop-shadow(0 0 60px ${surfaceColors.atmosphereBorder})`,
+              opacity: 0.7,
+              filter: `drop-shadow(0 0 25px ${surfaceColors.atmosphereBorder}) drop-shadow(0 0 50px ${surfaceColors.atmosphereBorder})`,
             }}
             onError={(e) => {
               e.currentTarget.style.display = 'none';
@@ -1147,7 +1147,7 @@ export default function LandingAnimation() {
         </div>
       )}
 
-      {/* ── Planet globe — large circle, only top arc visible as surface ── */}
+      {/* ── Planet globe — large circle with planet image as surface texture ── */}
       <div
         className="absolute z-[2]"
         style={{
@@ -1156,7 +1156,24 @@ export default function LandingAnimation() {
           background: planetFallback,
           ...(surfaceShake ? { animation: 'la-surface-shake 0.4s ease-out' } : {}),
         }}
-      />
+      >
+        {loadingMissionId && PLANET_IMAGES[loadingMissionId] && (
+          <img
+            src={PLANET_IMAGES[loadingMissionId]}
+            alt={`${loadingMissionId} surface`}
+            style={{
+              position: 'absolute',
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+              opacity: 0.35,
+            }}
+            onError={(e) => {
+              e.currentTarget.style.display = 'none';
+            }}
+          />
+        )}
+      </div>
 
       {/* Atmosphere ring */}
       <div
