@@ -1118,36 +1118,7 @@ export default function LandingAnimation() {
       {/* ── Power bar ── */}
       <PowerBar landing={landing} />
 
-      {/* ── Planet image disc — the actual planet visible above the surface ── */}
-      {loadingMissionId && PLANET_IMAGES[loadingMissionId] && (
-        <div
-          className="absolute z-[1] pointer-events-none"
-          style={{
-            bottom: 'calc(18vh + 4vh)',
-            left: '50%',
-            transform: 'translateX(-50%)',
-            width: '50vh',
-            height: '50vh',
-          }}
-        >
-          <img
-            src={PLANET_IMAGES[loadingMissionId]}
-            alt={`${loadingMissionId} planet`}
-            style={{
-              width: '100%',
-              height: '100%',
-              objectFit: 'contain',
-              opacity: 0.7,
-              filter: `drop-shadow(0 0 25px ${surfaceColors.atmosphereBorder}) drop-shadow(0 0 50px ${surfaceColors.atmosphereBorder})`,
-            }}
-            onError={(e) => {
-              e.currentTarget.style.display = 'none';
-            }}
-          />
-        </div>
-      )}
-
-      {/* ── Planet globe — large circle with planet image as surface texture ── */}
+      {/* ── Planet globe — the actual planet image as the landing surface arc ── */}
       <div
         className="absolute z-[2]"
         style={{
@@ -1160,13 +1131,17 @@ export default function LandingAnimation() {
         {loadingMissionId && PLANET_IMAGES[loadingMissionId] && (
           <img
             src={PLANET_IMAGES[loadingMissionId]}
-            alt={`${loadingMissionId} surface`}
+            alt={`${loadingMissionId} planet surface`}
             style={{
               position: 'absolute',
-              width: '100%',
-              height: '100%',
-              objectFit: 'cover',
-              opacity: 0.35,
+              top: 0,
+              left: '50%',
+              transform: 'translateX(-50%)',
+              width: '55vh',
+              height: '55vh',
+              objectFit: 'contain',
+              opacity: 0.85,
+              filter: `drop-shadow(0 0 15px ${surfaceColors.atmosphereBorder})`,
             }}
             onError={(e) => {
               e.currentTarget.style.display = 'none';
