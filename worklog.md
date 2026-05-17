@@ -91,3 +91,61 @@ Stage Summary:
 - The landing pod position is consistent with the updated rocket touchdown depth
 - The touchdown flash and effects (dust, sparks, shockwave) cover the visual transition from rocket to pod
 
+---
+Task ID: 2
+Agent: general-purpose
+Task: Update Palindrome Mission to Use Lucas Planet Image
+
+Work Log:
+- Copied `/home/z/my-project/public/planets/planet-lucas.png` to `/home/z/my-project/public/planets/planet-palindrome.png` (replacing the old palindrome planet image with the Lucas one)
+- Updated `PLANET_IMAGES` in `/home/z/my-project/src/components/mission/LandingAnimation.tsx` line 224: changed `palindrome: '/planets/planet-palindrome.png'` to `palindrome: '/planets/planet-lucas.png'`
+- Updated `PLANET_IMAGES` in `/home/z/my-project/src/components/mission/Dashboard.tsx` line 467: changed `palindrome: '/planets/planet-palindrome.png'` to `palindrome: '/planets/planet-lucas.png'`
+- Searched entire codebase for other references to `planet-palindrome.png` — none found outside of LandingAnimation.tsx, Dashboard.tsx, and worklog.md
+- Lint check passes with no errors
+
+Stage Summary:
+- Palindrome mission now uses the same planet image as the Lucas mission (`/planets/planet-lucas.png`)
+- Both the LandingAnimation and Dashboard components updated to reference the Lucas planet image for the palindrome mission
+- The old `planet-palindrome.png` file on disk was also overwritten with the Lucas image as a fallback
+
+---
+Task ID: 1
+Agent: landing-animation-fix
+Task: Fix Rocket Touchdown Animation in LandingAnimation.tsx
+
+Work Log:
+- Read the full LandingAnimation.tsx file (1198 lines) and the worklog.md
+- Identified two root causes: planet barely visible (160vw circle with bottom: -154vw showing only 6vw) and rocket not touching planet surface (ending at translateY(95px) pushing below surface)
+- Applied the following fixes to `/home/z/my-project/src/components/mission/LandingAnimation.tsx`:
+
+1. **Planet positioning** — Changed from `width: 160vw, height: 160vw, bottom: -154vw` to `width: 200vh, height: 200vh, bottom: -182vh`, making the top arc at 18vh from the bottom (much more visible)
+
+2. **Atmosphere ring** — Added a new `<div>` after the planet div with `z-[3]`, same 200vh dimensions, using `surfaceColors.atmosphereBorder` for border and box-shadow glow
+
+3. **Surface horizon line** — Added a new `<div>` after the atmosphere ring with `z-[4]`, positioned at `bottom: 18vh`, using `surfaceColors.surfaceLine` for gradient background and glow
+
+4. **`la-descent` keyframes** — Replaced entirely:
+   - OLD: 0%:-820px, 30%:-500px, 60%:-200px, 85%:-20px, 93%:50px, 100%:95px
+   - NEW: 0%:-800px, 25%:-550px, 50%:-280px, 70%:-100px, 85%:-15px, 95%:5px, 100%:0px
+   - Key: ends at translateY(0) so rocket's landing legs align with the 18vh surface line
+
+5. **All `6vw` → `18vh` replacements**:
+   - Landing pod: `calc(6vw - 8px)` → `calc(18vh - 8px)`
+   - Rocket wrapper: `calc(6vw - 50px)` → `calc(18vh - 55px)` (and initial translateY from -820px to -800px)
+   - DustCloud: `calc(6vw - 40px)` → `calc(18vh - 40px)`
+   - LandingSparks: `calc(6vw - 20px)` → `calc(18vh - 20px)`
+   - ShockwaveRing: `calc(6vw - 30px)` → `calc(18vh - 30px)`
+   - ExpandingRings: `calc(6vw - 38px)` → `calc(18vh - 38px)`
+   - ApproachPing: `calc(6vw - 35px)` → `calc(18vh - 35px)`
+   - Planet label: `calc(6vw - 140px)` → `calc(18vh - 140px)`
+
+6. Lint check passes with no errors
+7. Dev server compiles successfully
+
+Stage Summary:
+- Planet is now much more visible with 18vh of surface arc showing at the bottom
+- Rocket animation ends at translateY(0) with the wrapper at `bottom: calc(18vh - 55px)`, placing the landing legs right at the 18vh surface line
+- Slight bounce effect at 95% keyframe (translateY(5px)) provides natural touchdown feel
+- All effect components (dust, sparks, shockwave, rings, approach ping) repositioned to the new 18vh surface line
+- Atmosphere ring and horizon line provide clear visual indication of the planet surface
+

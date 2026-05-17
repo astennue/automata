@@ -464,7 +464,7 @@ const PLANET_IMAGES: Record<string, string> = {
   lucas: '/planets/planet-lucas.png',
   euclidean: '/planets/planet-euclidean.png',
   division: '/planets/planet-division.png',
-  palindrome: '/planets/planet-palindrome.png',
+  palindrome: '/planets/planet-lucas.png',
 };
 
 // Color mapping for neon glow effects
