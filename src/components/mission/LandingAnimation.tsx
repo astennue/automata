@@ -221,7 +221,7 @@ const PLANET_IMAGES: Record<string, string> = {
   lucas: '/planets/planet-lucas.png',
   euclidean: '/planets/planet-euclidean.png',
   division: '/planets/planet-division.png',
-  palindrome: '/planets/planet-lucas.png',
+  palindrome: '/planets/planet-palindrome.png',
 };
 
 // Planet names for the HUD
@@ -1118,7 +1118,36 @@ export default function LandingAnimation() {
       {/* ── Power bar ── */}
       <PowerBar landing={landing} />
 
-      {/* ── Planet globe — large circle, only top arc visible ── */}
+      {/* ── Planet image disc — visible in the background above the surface ── */}
+      {loadingMissionId && PLANET_IMAGES[loadingMissionId] && (
+        <div
+          className="absolute z-[1] pointer-events-none"
+          style={{
+            bottom: 'calc(18vh + 2vh)',
+            left: '50%',
+            transform: 'translateX(-50%)',
+            width: '45vh',
+            height: '45vh',
+          }}
+        >
+          <img
+            src={PLANET_IMAGES[loadingMissionId]}
+            alt={`${loadingMissionId} planet`}
+            style={{
+              width: '100%',
+              height: '100%',
+              objectFit: 'contain',
+              opacity: 0.6,
+              filter: `drop-shadow(0 0 30px ${surfaceColors.atmosphereBorder}) drop-shadow(0 0 60px ${surfaceColors.atmosphereBorder})`,
+            }}
+            onError={(e) => {
+              e.currentTarget.style.display = 'none';
+            }}
+          />
+        </div>
+      )}
+
+      {/* ── Planet globe — large circle, only top arc visible as surface ── */}
       <div
         className="absolute z-[2]"
         style={{
@@ -1127,19 +1156,7 @@ export default function LandingAnimation() {
           background: planetFallback,
           ...(surfaceShake ? { animation: 'la-surface-shake 0.4s ease-out' } : {}),
         }}
-      >
-        {loadingMissionId && PLANET_IMAGES[loadingMissionId] && (
-          <img
-            src={PLANET_IMAGES[loadingMissionId]}
-            alt={`${loadingMissionId} planet`}
-            style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.9 }}
-            onError={(e) => {
-              // Hide the broken image, fallback gradient is already visible
-              e.currentTarget.style.display = 'none';
-            }}
-          />
-        )}
-      </div>
+      />
 
       {/* Atmosphere ring */}
       <div
